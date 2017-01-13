@@ -1,0 +1,26 @@
+{
+  "name": "mysql_tools",
+  "version": "1.0.0",
+  "description": "mysql_tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhuyali/mysql_tools.git"
+  },
+  "keywords": [
+    "mysql_tools"
+  ],
+  "author": "zhuyali",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhuyali/mysql_tools/issues"
+  },
+  "homepage": "https://github.com/zhuyali/mysql_tools#readme",
+  "dependencies": {
+    "async": "^2.1.4",
+    "mysql": "^2.12.0"
+  }
+}
