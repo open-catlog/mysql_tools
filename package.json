@@ -4,7 +4,7 @@
   "description": "mysql_tools",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nohup node monitor.js &"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,8 @@
   "homepage": "https://github.com/zhuyali/mysql_tools#readme",
   "dependencies": {
     "async": "^2.1.4",
-    "mysql": "^2.12.0"
+    "forever-monitor": "^1.7.1",
+    "mysql": "^2.12.0",
+    "punt": "^2.3.0"
   }
 }
