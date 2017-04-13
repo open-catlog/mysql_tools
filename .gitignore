@@ -11,3 +11,4 @@ build/
 test
 hit
 config.js
+nohup.out
