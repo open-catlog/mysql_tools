@@ -7,12 +7,32 @@ var connect = require('./lib/connect');
 var throughput = require('./lib/throughput');
 var hitratio = require('./lib/hitratio');
 
-var client = punt.connect('10.1.2.11:5001');
+var client = punt.connect('10.1.2.57:5001');
 
-var databases = config.databases;
+var offline = {
+  host: config.offline_ip,
+  port: config.offline_port,
+  username: config.offline_username,
+  password: config.offline_password,
+  databases: config.offline_databases
+};
 
-for(let i = 0; i < databases.length; i++) {
-  let connection = connect(databases[i]);
-  throughput(connection, 5000, client, databases[i]);
-  hitratio(connection, 5000, client, databases[i]);  
+for(let i = 0; i < offline.databases.length; i++) {
+  let connection = connect(offline.host, offline.port, offline.username, offline.password, offline.databases[i]);
+  throughput(connection, 5000, client, offline.databases[i]);
+  hitratio(connection, 5000, client, offline.databases[i]);
+}
+
+var online = {
+  host: config.online_ip,
+  port: config.online_port,
+  username: config.online_username,
+  password: config.online_password,
+  databases: config.online_databases
+};
+
+for(let i = 0; i < online.databases.length; i++) {
+  let connection = connect(online.host, online.port[i], online.username, online.password, online.databases[i]);
+  throughput(connection, 5000, client, online.databases[i]);
+  hitratio(connection, 5000, client, online.databases[i]);
 }
