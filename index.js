@@ -5,7 +5,6 @@ var punt = require('punt');
 var config = require('./config');
 var connect = require('./lib/connect');
 var throughput = require('./lib/throughput');
-var hitratio = require('./lib/hitratio');
 
 var client = punt.connect('10.1.2.57:5001');
 
@@ -20,7 +19,6 @@ var offline = {
 for(let i = 0; i < offline.databases.length; i++) {
   let connection = connect(offline.host, offline.port, offline.username, offline.password, offline.databases[i]);
   throughput(connection, 5000, client, offline.databases[i]);
-  hitratio(connection, 5000, client, offline.databases[i]);
 }
 
 var online = {
@@ -34,5 +32,4 @@ var online = {
 for(let i = 0; i < online.databases.length; i++) {
   let connection = connect(online.host, online.port[i], online.username, online.password, online.databases[i]);
   throughput(connection, 5000, client, online.databases[i]);
-  hitratio(connection, 5000, client, online.databases[i]);
 }
