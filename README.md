@@ -1,23 +1,21 @@
-# mysql_tools
+# MySQL_Tools
 
-mysql_tools
+## 1. 简介
 
-## Installation
+用来采集 MySQL 数据库增删改查次数和连接次数的工具，主要使用了开源模块 mysql。
 
-```
-$ npm install mysql_tools
-```
+## 2. 采集方法
 
-## License
+获取上述次数可以通过在 MySQL 中执行 ` show global status like ${condition} `语句来进行获取，其中 condition 的取值可以为 `com_select`，`com_insert`，`com_update`，`com_delete`，`connections`五种，分别对应于查询、插入、更新、删除和连接次数的信息。
 
-The MIT License (MIT)
+## 3. 采集去向
+	
+通过 UDP 通信，将信息发送给 master，这里的 master 主要指向 [monitor-server](https://github.com/open-catlog/monitor-server)
 
-Copyright (c) 2016 zyl
+## 4. 整体流程
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Step 1：启动获取硬件信息的进程，并向 master 发送数据。
+	 
+Step 2：启动服务端主进程，接收来自 slave 的信息，并存储入数据库中。
 
 
